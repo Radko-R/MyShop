@@ -1,0 +1,2 @@
+class CartsCreateJob < CartsUpdateJob
+end

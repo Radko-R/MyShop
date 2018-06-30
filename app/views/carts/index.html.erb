@@ -1,0 +1,24 @@
+
+<% content_for :javascript do %>
+  <script type="text/javascript">
+      ShopifyApp.ready(function(){
+          ShopifyApp.Bar.initialize({ title: "Home" });
+      });
+  </script>
+<% end %>
+
+<h2>Carts</h2>
+
+<ul style="list-style-type:none">
+  <%= paginate @carts %>
+  <% @carts.reverse.each_with_index do |cart, index| %>
+    <li><%= index + 1%>: <%= link_to "Cart (token: #{cart.shopify_id})", carts_path(cart), target: "_top" %></li>
+  <% end %>
+  <%= paginate @carts %>
+</ul>
+<hr>
+
+
+
+
+

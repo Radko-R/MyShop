@@ -1,0 +1,54 @@
+<% content_for :javascript do %>
+  <script type="text/javascript">
+      ShopifyApp.ready(function(){
+          ShopifyApp.Bar.initialize({ title: "Home" });
+      });
+  </script>
+<% end %>
+
+<h2>Top 10 most popular products</h2>
+<table>
+  <th>Product id</th>
+  <th>Title</th>
+  <th>Current count</th>
+  <%- @popular_products.each do |product| %>
+    <tr>
+      <td><%= product["product_id"]%></td>
+      <td><%= product["title"]%></td>
+      <td><%= product["current_count"]%></td>
+  <% end %>
+  </tr>
+</table>
+
+
+<h2>Top 10 unpopular products</h2>
+<table>
+  <th>Product id</th>
+  <th>Title</th>
+  <th>Current count</th>
+  <%- @unpopular_products.each do |product| %>
+    <tr>
+      <td><%= product["product_id"]%></td>
+      <td><%= product["title"]%></td>
+      <td><%= product["current_count"]%></td>
+  <% end %>
+  </tr>
+</table>
+
+
+<hr>
+
+<h2><%= link_to 'Carts', carts_path %></h2>
+
+
+<h3>Webhooks</h3>
+
+<% if @webhooks.present? %>
+  <ul>
+    <% @webhooks.each do |webhook| %>
+      <li><%= webhook.topic %> : <%= webhook.address %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>This app has not created any webhooks for this Shop. Add webhooks to your ShopifyApp initializer if you need webhooks</p>
+<% end %>
